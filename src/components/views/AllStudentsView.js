@@ -34,6 +34,8 @@ const AllStudentsView = (props) => {
               </Link>
               <button onClick={() => deleteStudent(student.id)}>Delete</button>
               <hr/>
+
+            
             </div>
           );
         }
@@ -43,6 +45,9 @@ const AllStudentsView = (props) => {
         <button>Add New Student</button>
       </Link>
       <br/><br/>
+
+
+      
     </div>
   );
 };

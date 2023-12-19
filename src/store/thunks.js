@@ -24,13 +24,54 @@ export const fetchAllCampusesThunk = () => async (dispatch) => {  // The THUNK
 // THUNK CREATOR:
 export const fetchCampusThunk = (id) => async (dispatch) => {  // The THUNK
   try {
-    // API "get" call to get a student data (based on "id")from database
+    // API "get" call to get campus data (based on "id")from database
     let res = await axios.get(`/api/campuses/${id}`);  
     dispatch(ac.fetchCampus(res.data));
   } catch(err) {
     console.error(err);
   }
 };
+
+// Add Campus
+// THUNK CREATOR
+export const addCampusThunk = (campus) => async (dispatch) => {
+  try {
+    // API "get" call to get "campus" data from database
+    let res = await axios.post(`/api/campuses/`, campus)
+    // Call Action Creator to return Action object (type + payload with new campus data)
+    // Then dispatch the Action object to Reducer to update state 
+    dispatch(ac.addCampus(res.data))
+    return res.data
+  } catch (err) {
+    console.log(err)
+  }
+}
+// Delete Campus
+// THUNK CREATOR
+export const deleteCampusThunk = (campusId) => async (dispatch) => {
+  try {
+    // Make an API call to delete the campus
+    await axios.delete(`/api/campuses/${campusId}`);
+
+    // Dispatch the delete action to update the store
+    dispatch(ac.deleteCampus(campusId))
+  } catch (err) {
+    console.log(err)
+  }
+}
+// Edit Campus
+// THUNK CREATOR
+export const editCampusThunk = (updatedCampusData) => async (dispatch) => {
+  try {
+    // API "get" call to get campus data (based on "id")from database
+    let res = await axios.put(`/api/campuses/${updatedCampusData.id}`, updatedCampusData)
+    // Call Action Creator to return Action object (type + payload with new campus data)
+    // Then dispatch the Action object to Reducer to update state 
+    dispatch(ac.addCampus(res.data))
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 // All Students
 // THUNK CREATOR:
